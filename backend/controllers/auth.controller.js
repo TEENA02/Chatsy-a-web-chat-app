@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import generateTokenAndSetCookie from "../utils/generateToken.js";
 export const signup = async (req, res) => {
   try {
-    const { fullName, username, password, confirmPassword, gender } = req.body;
+    const { fullName, username, password, confirmPassword, gender,email } = req.body;
     if (password !== confirmPassword) {
       return res.status(400).json({ error: "Password dont match" });
     }
@@ -25,6 +25,7 @@ export const signup = async (req, res) => {
       password: hashedPassword,
       gender,
       profilePic: gender === "male" ? boyProfilePic : girlProfilePic,
+      email,
     });
    if(newUser){
     //generetae JWT token
@@ -35,6 +36,7 @@ export const signup = async (req, res) => {
       fullName: newUser.fullName,
       username: newUser.username,
       profilePic: newUser.profilePic,
+      email:newUser.email
     });
    }else{
     res.status(400).json({error:"Invalid user data"})

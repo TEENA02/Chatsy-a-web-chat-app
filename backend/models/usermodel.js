@@ -23,6 +23,10 @@ const userSchema=new mongoose.Schema(
         profilePic:{
             type:String,
            default:"",
+        },
+        email:{
+            type:String,
+            required:true, 
         }
     }, { timestamps: true }
 );
