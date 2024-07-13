@@ -7,11 +7,11 @@ import cookieParser from "cookie-parser";
 import authRoutes from './routes/authroutes.js'
 import messageRoutes from './routes/messageroutes.js'
 import userRoutes from "./routes/userroutes.js"
-
+import { app ,server} from "./socket/socket.js";
 //--------------------Data Base------------------------
 import databaseConnectMongoDB from "./db/databaseConnectMongoDB.js";
 
-const app=express();
+
 dotenv.config();
 //we cant directly get env variables
 const PORT=process.env.PORT || 5000;
@@ -31,7 +31,7 @@ app.use("/api/users",userRoutes)
 
 
 //creating multiple routing make code messy that why here we use middle ware
-app.listen(PORT,()=>{
+server.listen(PORT,()=>{
     databaseConnectMongoDB();
     console.log(`server is running on port ${PORT}`);
 });
